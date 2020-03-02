@@ -1,0 +1,3 @@
+[console_scripts]
+gah = gah.__main__:main
+
