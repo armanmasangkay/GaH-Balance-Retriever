@@ -1,7 +1,8 @@
 import sys
 from .classmodule import MyClass
-from .funcmodule import login
-from .funcmodule import createFile
+# from .funcmodule import login
+# from .funcmodule import createFile
+from .funcmodule import *
 
 def main():
     print('in main')
@@ -12,8 +13,6 @@ def main():
         #balance check 'gah balance'
         if (arg=='balance'):
             login()
-            #createFile()
-
 
     
 if __name__ == '__main__':

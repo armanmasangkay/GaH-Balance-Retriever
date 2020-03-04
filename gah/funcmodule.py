@@ -3,14 +3,21 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ChromeOptions, Chrome
-import time
+import os
 import json
 
-def login():
-    usernameStr='user'
-    passwordStr='crisjohn1111'
+mypath = os.path.dirname(os.path.abspath(__file__))
+mypath=mypath+'/account.json'
 
-  
+
+def login():
+    if (not accountFileExists()):
+        createFile()
+
+    account=getAccountValues()
+    usernameStr=account['username']
+    passwordStr=account['password']
+
     opts=ChromeOptions()
     opts.add_experimental_option('detach',True)
 
@@ -33,11 +40,6 @@ def login():
     #sends a message
     send_message(browser)
     
-def waitBeforeQuit(waitTime,browser):
-    time.sleep(waitTime)
-    browser.quit()
-
-
 def send_message(browser):
     number='8080'
     message='DATA BAL'
@@ -64,14 +66,28 @@ def send_message(browser):
     )
     popOk.click()
 
-    #waitBeforeQuit(5,browser)
+
+def getAccountValues():
+    with open(mypath,'r') as f:
+        data=json.load(f)
+    return data
+
+def accountFileExists():
+    if os.path.isfile(mypath):
+        return True
+    else:
+        return False
+
 
 def createFile():
+    print('Seems like you have not set up an account yet.')
+    user=input('Enter a username:')
+    pwd=input('Enter a password:')
     data={
-        'username':'',
-        'password':''
+        'username':user,
+        'password':pwd
     }
-    with open('account.json','w') as f:
+    with open(mypath,'w') as f:
         json.dump(data,f)
     
 
