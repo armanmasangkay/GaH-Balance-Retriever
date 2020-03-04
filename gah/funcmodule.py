@@ -5,9 +5,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ChromeOptions, Chrome
 import os
 import json
+import time
 
 mypath = os.path.dirname(os.path.abspath(__file__))
 mypath=mypath+'/account.json'
+
+
 
 
 def login():
@@ -80,7 +83,10 @@ def accountFileExists():
 
 
 def createFile():
-    print('Seems like you have not set up an account yet.')
+    if (not accountFileExists):
+        print('Seems like you have not set up an account yet.')
+    else:
+        print ('Enter new account details below')
     user=input('Enter a username:')
     pwd=input('Enter a password:')
     data={

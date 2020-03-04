@@ -5,14 +5,15 @@ from .classmodule import MyClass
 from .funcmodule import *
 
 def main():
-    print('in main')
     args = sys.argv[1:]
-    print('count of args :: {}'.format(len(args)))
     for arg in args:
-        print('passed argument :: {}'.format(arg))
         #balance check 'gah balance'
         if (arg=='balance'):
             login()
+        elif (arg=='change'):
+            #calling createFile again to change the account details
+            createFile()
+
 
     
 if __name__ == '__main__':
